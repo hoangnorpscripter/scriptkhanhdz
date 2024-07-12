@@ -2079,7 +2079,8 @@ end
 spawn(function()
     while task.wait() do
         pcall(function()
-            if _G.conmemay or _G.AutoLevel or _G.CakePrince or _G.memayshit then
+            if _G.conmemay or _G.AutoLevel or _G.CakePrince or _G.memayshit or
+            _G.AutoElite and game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
                 if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                     local Noclip = Instance.new("BodyVelocity")
                     Noclip.Name = "BodyClip"
@@ -2097,7 +2098,8 @@ end)
 spawn(function()
     pcall(function()
         game:GetService("RunService").Stepped:Connect(function()
-            if _G.conmemay or _G.AutoLevel or _G.memayshit or _G.CakePrince then
+            if _G.conmemay or _G.AutoLevel or _G.memayshit or _G.CakePrince or
+            _G.AutoElite and game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
                 for i, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -2124,6 +2126,16 @@ local Main = lib:Start({
         print("Closed")
     end
 })
+
+function Alert(title, content, logo, time, delay)
+    Main:Notify({
+        ["Title"] = title,
+        ["Content"] = content,
+        ["Logo"] = logo,
+        ["Time"] = time,
+        ["Delay"] = delay
+    })
+end
 
 local S = Main:MakeTab("Setting")
 local set = S:Seperator("Setting")
@@ -2517,6 +2529,96 @@ spawn(function()
                             end
                         end
                     end
+                end
+            end)
+        end
+    end
+end)
+
+
+local Label = M:Label("Elite")
+-- 🟢
+-- 🔴
+local elitestatup
+local elitecheck
+spawn(function()
+    while wait() do
+        if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+            elitestatup = "Elite boss: 🟢"
+            elitecheck = "Elite Found"
+        else
+            elitestatup = "Elite boss: 🔴"
+            elitecheck = "Elite Not Found"
+        end
+    end
+end)
+
+local elitesex = M:Button({
+	["Title"]= elitestatup,
+	["Content"] = elitecheck,
+	["Logo"] = "",
+	["Callback"] = function()
+        if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+            Alert("Elite Found", "Elite boss: 🟢", "", 4, 0)
+        else
+            Alert("Elite Not Found", "Elite boss: 🔴", "", 4, 0)
+        end
+    end
+})
+
+local ToggleBone = M:Toggle({
+    ["Title"] = "Farm Elite",
+    ["Content"] = "",
+    ["Default"] = false,
+    ["Callback"] = function(Value)
+        _G.AutoElite = Value
+        if Value == false then
+            beo(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+        end
+    end
+})
+
+spawn(function()
+    while task.wait() do
+        if _G.AutoElite then
+            pcall(function()
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Diablo") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Deandre") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Urban") then
+                        if game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                    if v.Name == "Diablo" or v.Name == "Deandre" or v.Name == "Urban" then
+                                     repeat wait(_G.caubedangyeu)
+                                            attack()
+                                            --EquipTool(SelectWeapon)
+                                            AutoHaki()
+                                            beo(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0))
+                                            FarmPos = v.HumanoidRootPart.CFrame
+                                            MonFarm = v.Name
+                                            v.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
+                                            v.Humanoid.JumpPower = 0
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                                        until _G.AutoElite == false or v.Humanoid.Health <= 0 or not v.Parent
+                                    end
+                                end
+                            end
+                        else
+                          
+                            if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") then
+                             toTarget(game:GetService("ReplicatedStorage"):FindFirstChild("Diablo").HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                            elseif game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") then
+                             toTarget(game:GetService("ReplicatedStorage"):FindFirstChild("Deandre").HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                            elseif game:GetService("ReplicatedStorage"):FindFirstChild("Urban") then
+                             toTarget(game:GetService("ReplicatedStorage"):FindFirstChild("Urban").HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                            end
+
+                        end
+                  
+                    end
+                else
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter")
                 end
             end)
         end
