@@ -2436,7 +2436,7 @@ end)
 local TogglecSpawnCp = M:Toggle({
     ["Title"] = "Auto Spawn Katakuri",
     ["Content"] = "spam",
-    ["Default"] = false,
+    ["Default"] = true,
     ["Callback"] = function(Value)
         _G.meobel = Value
     end
@@ -2496,7 +2496,7 @@ spawn(function()
                                     bringmob = true
                                     AutoHaki()
                                     --EquipTool(SelectWeapon)
-                                    beo(v.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
+                                    beo(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0))
                                     v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                     v.HumanoidRootPart.Transparency = 1
                                     v.Humanoid.JumpPower = 0
