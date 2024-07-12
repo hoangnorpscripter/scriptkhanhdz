@@ -2541,15 +2541,20 @@ local Label = M:Label("Elite")
 -- 🔴
 local elitestatup
 local elitecheck
+
+function eliteabc()
+    if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+        elitestatup = "Elite boss: 🟢"
+        elitecheck = "Elite Found"
+    else
+        elitestatup = "Elite boss: 🔴"
+        elitecheck = "Elite Not Found"
+    end
+end
+
 spawn(function()
     while wait() do
-        if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
-            elitestatup = "Elite boss: 🟢"
-            elitecheck = "Elite Found"
-        else
-            elitestatup = "Elite boss: 🔴"
-            elitecheck = "Elite Not Found"
-        end
+        eliteabc()
     end
 end)
 
