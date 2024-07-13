@@ -2117,7 +2117,7 @@ local lib = loadstring(game:HttpGet("https://github.com/ErutTheTeru/uilibrary/bl
 
 local Main = lib:Start({
     ["Name"] = "Riser Hub",
-    ["Logo Player"] = "rbxassetid://18359896048",
+    ["Logo Player"] = "rbxassetid://17634661789",
     ["Name Player"] = "TCPhuc",
     ["Tab Width"] = 120,
     ["Color"] = Color3.fromRGB(6.000000117346644, 141.0000067949295, 234.00000125169754),
@@ -2127,11 +2127,11 @@ local Main = lib:Start({
     end
 })
 
-function Alert(title, content, logo, time, delay)
+function Alert(title, content, time, delay)
     Main:Notify({
         ["Title"] = title,
         ["Content"] = content,
-        ["Logo"] = logo,
+        ["Logo"] = "rbxassetid://17634661789",
         ["Time"] = time,
         ["Delay"] = delay
     })
@@ -2539,8 +2539,8 @@ end)
 local Label = M:Label("Elite")
 -- 🟢
 -- 🔴
-local elitestatup
-local elitecheck
+local elitestatup = "Elite boss: 🔴"
+local elitecheck = "Elite Not Found"
 
 function eliteabc()
     if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
@@ -2564,12 +2564,14 @@ local elitesex = M:Button({
 	["Logo"] = "",
 	["Callback"] = function()
         if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
-            Alert("Elite Found", "Elite boss: 🟢", "", 4, 0)
+            Alert("Elite Found", "Elite boss: 🟢", 4, 0)
         else
-            Alert("Elite Not Found", "Elite boss: 🔴", "", 4, 0)
+            Alert("Elite Not Found", "Elite boss: 🔴", 4, 0)
         end
     end
 })
+
+eliteabc()
 
 local ToggleBone = M:Toggle({
     ["Title"] = "Farm Elite",
@@ -2610,7 +2612,6 @@ spawn(function()
                                 end
                             end
                         else
-                          
                             if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") then
                              toTarget(game:GetService("ReplicatedStorage"):FindFirstChild("Diablo").HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
                             elseif game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") then
@@ -2629,3 +2630,6 @@ spawn(function()
         end
     end
 end)
+
+
+Alert("Script load Completed", "Thank for Using", 4, 0)
