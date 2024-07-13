@@ -2553,14 +2553,15 @@ function eliteabc()
 end
 
 spawn(function()
-    while wait() do
+    while true do
         eliteabc()
+        wait(1)
     end
 end)
 
 local elitesex = M:Button({
-	["Title"]= elitestatup,
-	["Content"] = elitecheck,
+	["Title"]= function() return elitestatup end,
+	["Content"] = function() return elitecheck end,
 	["Logo"] = "",
 	["Callback"] = function()
         if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
@@ -2572,6 +2573,7 @@ local elitesex = M:Button({
 })
 
 eliteabc()
+
 
 local ToggleBone = M:Toggle({
     ["Title"] = "Farm Elite",
