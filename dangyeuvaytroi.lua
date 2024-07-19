@@ -2146,7 +2146,7 @@ local M = Main:MakeTab("Main")
 local abc = M:Seperator("Main")
 
 local sea = Main:MakeTab("Sea Event")
-local cac = M:Seperator("Sea Event")
+local cac = sea:Seperator("Sea Event")
 
 local LabelBring = S:Label("Bring Mobs")
 local Bring = S:Toggle({
