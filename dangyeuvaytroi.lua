@@ -989,7 +989,7 @@ local M = Main:MakeTab("Main")
 local abc = M:Seperator("Main")
 
 local Stat = Main:MakeTab("Stats")
-local shiet = M:Seperator("Auto Stats")
+local shiet = Stat:Seperator("Auto Stats")
 
 local LabelBring = S:Label("Bring Mobs")
 local Bring = S:Toggle({
@@ -2080,7 +2080,8 @@ spawn(function()
     while task.wait() do
         pcall(function()
             if _G.conmemay or _G.AutoLevel or _G.CakePrince or _G.memayshit or
-            _G.AutoElite and game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+            _G.AutoElite and game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") or
+            game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") then
                 if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                     local Noclip = Instance.new("BodyVelocity")
                     Noclip.Name = "BodyClip"
@@ -2099,7 +2100,8 @@ spawn(function()
     pcall(function()
         game:GetService("RunService").Stepped:Connect(function()
             if _G.conmemay or _G.AutoLevel or _G.memayshit or _G.CakePrince or
-            _G.AutoElite and game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+            _G.AutoElite and game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") or
+            game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") then
                 for i, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -2116,9 +2118,9 @@ local lib = loadstring(game:HttpGet("https://github.com/ErutTheTeru/uilibrary/bl
 
 
 local Main = lib:Start({
-    ["Name"] = "Riser Hub",
+    ["Name"] = "!Onltz Hub",
     ["Logo Player"] = "rbxassetid://17634661789",
-    ["Name Player"] = "TCPhuc",
+    ["Name Player"] = "by khanhdz",
     ["Tab Width"] = 120,
     ["Color"] = Color3.fromRGB(6.000000117346644, 141.0000067949295, 234.00000125169754),
     ["Custom Toggle"] = false,
@@ -2142,6 +2144,9 @@ local set = S:Seperator("Setting")
 
 local M = Main:MakeTab("Main")
 local abc = M:Seperator("Main")
+
+local sea = Main:MakeTab("Sea Event")
+local cac = M:Seperator("Sea Event")
 
 local LabelBring = S:Label("Bring Mobs")
 local Bring = S:Toggle({
@@ -2634,4 +2639,207 @@ spawn(function()
 end)
 
 
+local flythuyenbuoi = sea:Toggle({
+    ["Title"] = "Fly boat",
+    ["Content"] = "Legit (posY 24 -> 100)",
+    ["Default"] = true,
+    ["Callback"] = function(Value)
+        _G.flycaibuoi = Value
+    end
+})
+
+spawn(function()
+    while wait() do
+        if _G.flycaibuoi then
+            pcall(function()
+                for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                    if (v.VehicleSeat.CFrame.Position -
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position).Magnitude <= 5 then
+                        repeat
+                            wait()
+                            v.VehicleSeat.BodyPosition.D = 300
+                            v.VehicleSeat.BodyPosition.Position = Vector3.new(0, 24, 0)
+                        until not _G.flycaibuoi or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+
+local memaythangngu = sea:Dropdown({
+    ["Title"]= "Choose Speed list",
+	["Content"] = "For Boats",
+	["Multi"] = false,
+	["Options"] = {150, 200, 250, 300},
+    ["Default"] = {150},
+	["Callback"] = function(Value)
+        speedchocaithuyenbuoi = Value
+    end
+})
+
+local speedthuyenconcac = sea:Toggle({
+    ["Title"] = "Boost Speed Boats",
+    ["Content"] = "Legit",
+    ["Default"] = true,
+    ["Callback"] = function(Value)
+        _G.speedchocaiconcac = Value
+    end
+})
+
+spawn(function()
+    while wait() do
+        if _G.speedchocaiconcac then
+            pcall(function()
+                for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                    if (v.VehicleSeat.CFrame.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position).Magnitude <=5 then
+                        v.VehicleSeat.MaxSpeed = _G.speedchocaithuyenbuoi
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+function TweenShip(CFgo)
+    local tween_s = game:service"TweenService"
+    for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+        if (v.VehicleSeat.CFrame.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position).Magnitude <=5 then
+            local info = TweenInfo.new((v.VehicleSeat.CFrame.Position - CFgo.Position).Magnitude/300, Enum.EasingStyle.Linear)
+            tween = tween_s:Create(v.VehicleSeat, info, {CFrame = CFgo})
+        end
+    end
+    tween:Play()
+
+    local tweenfunc = {}
+
+    function tweenfunc:Stop()
+        tween:Cancel()
+    end
+
+    return tweenfunc
+end
+
+local conmemaytweenboats = sea:Toggle({
+    ["Title"] = "Auto Find Leviathan (Need testing)",
+    ["Content"] = "every boats near",
+    ["Default"] = true,
+    ["Callback"] = function(Value)
+        _G.tweenboatscaidaubuoi = Value
+        if Value == false then
+            for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                if (v.VehicleSeat.CFrame.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position).Magnitude <= 5 then
+                    v.VehicleSeat.BodyPosition.D = 300
+                    v.VehicleSeat.BodyPosition.Position = Vector3.new(0, 24, 0)
+                    TweenShip(v.VehicleSeat.CFrame)
+                end
+            end
+        end
+    end
+})
+
+spawn(function()
+    while wait() do
+        if _G.tweenboatscaidaubuoi then
+            pcall(function()
+                for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                    if (v.VehicleSeat.CFrame.Position -
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position).Magnitude <= 5 then
+                        repeat
+                            wait()
+                            v.VehicleSeat.BodyPosition.D = 3000
+                            v.VehicleSeat.BodyPosition.Position = Vector3.new(0, 200, 0)
+                            TweenShip(v.VehicleSeat.CFrame * CFrame.new(-30, 0, -30))
+                        until not _G.tweenboatscaidaubuoi or game.Players.LocalPlayer.Character.Humanoid.Health <= 0 or not v:FindFirstChild("VehicleSeat") or game:GetService("Workspace").Maps:FindFirstChild("LeviathanGate")
+                        v.VehicleSeat.BodyPosition.D = 300
+                        v.VehicleSeat.BodyPosition.Position = Vector3.new(0, 24, 0)
+                        TweenShip(v.VehicleSeat.CFrame)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+
 Alert("Script load Completed", "Thank for Using", 4, 0)
+
+-- game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre")
+--[[
+
+Galley Pirate
+Lab Subordinate
+Ship Steward
+Ship Officer
+Snow Trooper
+Winter Warrior
+Raider
+Mercenary
+Ship Deckhand
+Horned Warrior
+Sea Soldier
+Water Fighter
+Vampire
+Ship Engineer
+Arctic Warrior
+Galley Captain
+Snow Lurker
+Zombie
+Lava Pirate
+
+
+quái của Pirates Raid
+game:GetService("ReplicatedStorage"):FindFirstChild("Galley Pirate") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Lab Subordinate") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Ship Steward") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Ship Officer") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Snow Trooper") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Winter Warrior") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Raider") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Mercenary") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Ship Deckhand") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Horned Warrior") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Sea Soldier") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Water Fighter") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Vampire") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Ship Engineer") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Arctic Warrior") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Galley Captain") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Snow Lurker") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Zombie") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Lava Pirate") or
+game:GetService("Workspace").Enemies:FindFirstChild("Galley Pirate") or
+game:GetService("Workspace").Enemies:FindFirstChild("Lab Subordinate") or
+game:GetService("Workspace").Enemies:FindFirstChild("Ship Steward") or
+game:GetService("Workspace").Enemies:FindFirstChild("Ship Officer") or
+game:GetService("Workspace").Enemies:FindFirstChild("Snow Trooper") or
+game:GetService("Workspace").Enemies:FindFirstChild("Winter Warrior") or
+game:GetService("Workspace").Enemies:FindFirstChild("Raider") or
+game:GetService("Workspace").Enemies:FindFirstChild("Mercenary") or
+game:GetService("Workspace").Enemies:FindFirstChild("Ship Deckhand") or
+game:GetService("Workspace").Enemies:FindFirstChild("Horned Warrior") or
+game:GetService("Workspace").Enemies:FindFirstChild("Sea Soldier") or
+game:GetService("Workspace").Enemies:FindFirstChild("Water Fighter") or
+game:GetService("Workspace").Enemies:FindFirstChild("Vampire") or
+game:GetService("Workspace").Enemies:FindFirstChild("Ship Engineer") or
+game:GetService("Workspace").Enemies:FindFirstChild("Arctic Warrior") or
+game:GetService("Workspace").Enemies:FindFirstChild("Galley Captain") or
+game:GetService("Workspace").Enemies:FindFirstChild("Snow Lurker") or
+game:GetService("Workspace").Enemies:FindFirstChild("Zombie") or
+game:GetService("Workspace").Enemies:FindFirstChild("Lava Pirate")
+
+if game:GetService("ReplicatedStorage"):FindFirstChild("Galley Pirate") or game:GetService("ReplicatedStorage"):FindFirstChild("Lab Subordinate") or game:GetService("ReplicatedStorage"):FindFirstChild("Ship Steward") or game:GetService("ReplicatedStorage"):FindFirstChild("Ship Officer") or game:GetService("ReplicatedStorage"):FindFirstChild("Snow Trooper") or game:GetService("ReplicatedStorage"):FindFirstChild("Winter Warrior") or game:GetService("ReplicatedStorage"):FindFirstChild("Raider") or game:GetService("ReplicatedStorage"):FindFirstChild("Mercenary") or game:GetService("ReplicatedStorage"):FindFirstChild("Ship Deckhand") or game:GetService("ReplicatedStorage"):FindFirstChild("Horned Warrior") or game:GetService("ReplicatedStorage"):FindFirstChild("Sea Soldier") or game:GetService("ReplicatedStorage"):FindFirstChild("Water Fighter") or game:GetService("ReplicatedStorage"):FindFirstChild("Vampire") or game:GetService("ReplicatedStorage"):FindFirstChild("Ship Engineer") or game:GetService("ReplicatedStorage"):FindFirstChild("Arctic Warrior") or game:GetService("ReplicatedStorage"):FindFirstChild("Galley Captain") or
+game:GetService("ReplicatedStorage"):FindFirstChild("Snow Lurker") or game:GetService("ReplicatedStorage"):FindFirstChild("Zombie") or game:GetService("ReplicatedStorage"):FindFirstChild("Lava Pirate") or game:GetService("Workspace").Enemies:FindFirstChild("Galley Pirate") or game:GetService("Workspace").Enemies:FindFirstChild("Lab Subordinate") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Steward") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Officer") or game:GetService("Workspace").Enemies:FindFirstChild("Snow Trooper") or game:GetService("Workspace").Enemies:FindFirstChild("Winter Warrior") or game:GetService("Workspace").Enemies:FindFirstChild("Raider") or game:GetService("Workspace").Enemies:FindFirstChild("Mercenary") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Deckhand") or game:GetService("Workspace").Enemies:FindFirstChild("Horned Warrior") or game:GetService("Workspace").Enemies:FindFirstChild("Sea Soldier") or game:GetService("Workspace").Enemies:FindFirstChild("Water Fighter") or game:GetService("Workspace").Enemies:FindFirstChild("Vampire") or 
+game:GetService("Workspace").Enemies:FindFirstChild("Ship Engineer") or game:GetService("Workspace").Enemies:FindFirstChild("Arctic Warrior") or game:GetService("Workspace").Enemies:FindFirstChild("Galley Captain") or game:GetService("Workspace").Enemies:FindFirstChild("Snow Lurker") or game:GetService("Workspace").Enemies:FindFirstChild("Zombie") or game:GetService("Workspace").Enemies:FindFirstChild("Lava Pirate") then
+    print("shit")
+end
+
+]]--
+--if game:GetService("ReplicatedStorage"):FindFirstChild("Galley Pirate") or game:GetService("ReplicatedStorage"):FindFirstChild("Lab Subordinate") or game:GetService("ReplicatedStorage"):FindFirstChild("Ship Steward") or game:GetService("ReplicatedStorage"):FindFirstChild("Ship Officer") or game:GetService("ReplicatedStorage"):FindFirstChild("Snow Trooper") or game:GetService("ReplicatedStorage"):FindFirstChild("Winter Warrior") or game:GetService("ReplicatedStorage"):FindFirstChild("Raider") or game:GetService("ReplicatedStorage"):FindFirstChild("Mercenary") or game:GetService("ReplicatedStorage"):FindFirstChild("Ship Deckhand") or game:GetService("ReplicatedStorage"):FindFirstChild("Horned Warrior") or game:GetService("ReplicatedStorage"):FindFirstChild("Sea Soldier") or game:GetService("ReplicatedStorage"):FindFirstChild("Water Fighter") or game:GetService("ReplicatedStorage"):FindFirstChild("Vampire") or game:GetService("ReplicatedStorage"):FindFirstChild("Ship Engineer") or game:GetService("ReplicatedStorage"):FindFirstChild("Arctic Warrior") or game:GetService("ReplicatedStorage"):FindFirstChild("Galley Captain") or
+--game:GetService("ReplicatedStorage"):FindFirstChild("Snow Lurker") or game:GetService("ReplicatedStorage"):FindFirstChild("Zombie") or game:GetService("ReplicatedStorage"):FindFirstChild("Lava Pirate") or game:GetService("Workspace").Enemies:FindFirstChild("Galley Pirate") or game:GetService("Workspace").Enemies:FindFirstChild("Lab Subordinate") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Steward") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Officer") or game:GetService("Workspace").Enemies:FindFirstChild("Snow Trooper") or game:GetService("Workspace").Enemies:FindFirstChild("Winter Warrior") or game:GetService("Workspace").Enemies:FindFirstChild("Raider") or game:GetService("Workspace").Enemies:FindFirstChild("Mercenary") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Deckhand") or game:GetService("Workspace").Enemies:FindFirstChild("Horned Warrior") or game:GetService("Workspace").Enemies:FindFirstChild("Sea Soldier") or game:GetService("Workspace").Enemies:FindFirstChild("Water Fighter") or game:GetService("Workspace").Enemies:FindFirstChild("Vampire") or 
+--game:GetService("Workspace").Enemies:FindFirstChild("Ship Engineer") or game:GetService("Workspace").Enemies:FindFirstChild("Arctic Warrior") or game:GetService("Workspace").Enemies:FindFirstChild("Galley Captain") or game:GetService("Workspace").Enemies:FindFirstChild("Snow Lurker") or game:GetService("Workspace").Enemies:FindFirstChild("Zombie") or game:GetService("Workspace").Enemies:FindFirstChild("Lava Pirate") then
+--   print("shit")
+--end
+
+
