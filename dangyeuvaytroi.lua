@@ -2076,6 +2076,27 @@ function beo(Pos)
     end
 end
 
+function CheckMobPirateRaid()
+    for r, v in pairs(game.workspace.Enemies:GetChildren()) do
+        pcall(
+            pcall(
+                function()
+                    if
+                        not string.find(v.Name, "Brigade") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and
+                            v:FindFirstChild("HumanoidRootPart") and
+                            (v.HumanoidRootPart.Position -
+                                Vector3.new(-5543.5327148438, 313.80062866211, -2964.2585449219)).magnitude <= 1000 and
+                            not string.find(v.Name, "Boss") and
+                            not string.find(v.Name, "Friend")
+                     then
+                        return v
+                    end
+                end
+            )
+        )
+    end
+end 
+
 spawn(function()
     while task.wait() do
         pcall(function()
@@ -2332,7 +2353,7 @@ spawn(function()
                             if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                                 if v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy" then
                                     repeat
-                                        wait(_G.caubedangyeu)
+                                        wait(0.01)
                                         attack()
                                         AutoHaki()
                                         beo(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0))
@@ -2540,49 +2561,14 @@ spawn(function()
     end
 end)
 
-
-local Label = M:Label("Elite")
 -- 🟢
 -- 🔴
 local elitestatup = "Elite boss: 🔴"
 local elitecheck = "Elite Not Found"
 
-function eliteabc()
-    if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
-        elitestatup = "Elite boss: 🟢"
-        elitecheck = "Elite Found"
-    else
-        elitestatup = "Elite boss: 🔴"
-        elitecheck = "Elite Not Found"
-    end
-end
-
-spawn(function()
-    while true do
-        eliteabc()
-        wait(1)
-    end
-end)
-
-local elitesex = M:Button({
-	["Title"]= function() return elitestatup end,
-	["Content"] = function() return elitecheck end,
-	["Logo"] = "",
-	["Callback"] = function()
-        if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
-            Alert("Elite Found", "Elite boss: 🟢", 4, 0)
-        else
-            Alert("Elite Not Found", "Elite boss: 🔴", 4, 0)
-        end
-    end
-})
-
-eliteabc()
-
-
-local ToggleBone = M:Toggle({
+local ToggleElite = M:Toggle({
     ["Title"] = "Farm Elite",
-    ["Content"] = "",
+    ["Content"] = "Need Test",
     ["Default"] = false,
     ["Callback"] = function(Value)
         _G.AutoElite = Value
@@ -2634,6 +2620,43 @@ spawn(function()
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter")
                 end
             end)
+        end
+    end
+end)
+
+local TogglePiratesRaid = M:Toggle({
+    ["Title"] = "Auto pirates raid",
+    ["Content"] = "Need Test",
+    ["Default"] = false,
+    ["Callback"] = function(Value)
+        _G.haicac = Value
+        if Value == false then
+            beo(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+        end
+    end
+})
+
+spawn(function()
+    while wait() do
+        if _G.haicac then
+            mobngu = CheckMobPirateRaid()
+            if game.Workspace.Enemies:FindFirstChild(mobngu.Name) then
+                repeat
+                    attack()
+                    -- EquipTool(SelectWeapon)
+                    AutoHaki()
+                    beo(mobngu.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0))
+                    FarmPos = mobngu.HumanoidRootPart.CFrame
+                    MonFarm = mobngu.Name
+                    mobngu.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
+                    mobngu.Humanoid.JumpPower = 0
+                    mobngu.Humanoid.WalkSpeed = 0
+                    mobngu.HumanoidRootPart.CanCollide = false
+                    mobngu.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                until not _G.haicac or not mobngu:FindFirstChild("HumanoidRootPart") or mobngu.Humanoid.Health <= 0
+            else
+                spawn(beo(mobngu.HumanoidRootPart.CFrame * CFrame.new(0, 60, 0)), 1)
+            end
         end
     end
 end)
