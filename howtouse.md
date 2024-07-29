@@ -1,6 +1,6 @@
 ## Loadstring
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/hoangnorpscripter/scriptkhanhdz/main/library.lua"))()
 ```
 
 ## Features:
@@ -15,8 +15,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/m
 - Prompts
 
 ... more to be added.
-
-Created by [Deity#0228] and [Abstract#8007]
 
 ## Documentation
 
