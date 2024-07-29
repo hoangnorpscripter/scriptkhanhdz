@@ -20,12 +20,12 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/hoangnorpscripter/scr
 
 ### Get the Library
 ```lua
-local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
+local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
 ```
 
 ### Create the GUI
 ```lua
-local GUI = Mercury:Create{
+local Main = lib:Create{
     Name = "Mercury",
     Size = UDim2.fromOffset(600, 400),
     Theme = Mercury.Themes.Dark,
@@ -35,7 +35,7 @@ local GUI = Mercury:Create{
 
 ### Tabs
 ```lua
-local Tab = GUI:Tab{
+local Tab = MainGUI:Tab{
 	Name = "New Tab",
 	Icon = "rbxassetid://8569322835"
 }
