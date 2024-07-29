@@ -35,7 +35,7 @@ local Main = lib:Create{
 
 ### Tabs
 ```lua
-local Tab = MainGUI:Tab{
+local Tab = Main:Tab{
 	Name = "New Tab",
 	Icon = "rbxassetid://8569322835"
 }
