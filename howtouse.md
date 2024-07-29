@@ -20,13 +20,13 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/hoangnorpscripter/scr
 
 ### Get the Library
 ```lua
-local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
+local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/hoangnorpscripter/scriptkhanhdz/main/library.lua"))()
 ```
 
 ### Create the GUI
 ```lua
 local Main = lib:Create{
-    Name = "Mercury",
+    Name = "Mythic Hub",
     Size = UDim2.fromOffset(600, 400),
     Theme = Mercury.Themes.Dark,
     Link = "https://github.com/deeeity/mercury-lib"
